@@ -67,4 +67,5 @@ class App extends StatelessWidget {
 > error lens 익스텐션 설치도 추천
 
 
-## code action
+## 챌린지
+- currency_card 가 order 값을 받아고, 그 값으로 offset 을 계산하게 바꾸기

@@ -47,3 +47,24 @@ class App extends StatelessWidget {
   }
 }
 ```
+
+## vscode settings
+
+`settings.json` 에 다음 속성을 추가합니다.
+
+```json
+"editor.codeActionsOnSave": {
+  "source.fixAll": true,
+},
+"dart.previewFlutterUiGuides": true,
+```
+
+- 저장할 때마다 `const` 를 붙여줍니다.
+- 부모가 무엇인지 알려주는 줄을 만들어줍니다.
+
+![](readMeImages/2023-09-02-22-32-57.png)
+
+> error lens 익스텐션 설치도 추천
+
+
+## code action

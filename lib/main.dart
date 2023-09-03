@@ -20,8 +20,8 @@ class App extends StatelessWidget {
         cardColor: const Color(0xFFF4EDDB),
         colorScheme: const ColorScheme(
             brightness: Brightness.dark,
-            error: Colors.black12,
-            primary: Color(0xFFFFFFFF),
+            error: Colors.deepOrange,
+            primary: Colors.blue,
             onPrimary: Colors.black,
             secondary: Colors.black12,
             onSecondary: Colors.black45,

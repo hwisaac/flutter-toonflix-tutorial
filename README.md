@@ -362,3 +362,10 @@ class CurrencyCard extends StatelessWidget {
 
 ![](readMeImages/2023-09-03-15-15-17.png)
 
+
+## stateful widget
+> stateless widget 은 build 메서드를 통해 ui 를 출력하는 것이고, stateful widget 은 상태에 따라 ui가 변하게 됩니다.
+
+stateful widget 은 두 부분으로 나눕니다.
+- state가 없을 때
+- state가 있을 때

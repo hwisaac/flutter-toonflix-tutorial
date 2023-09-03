@@ -373,3 +373,183 @@ stateful widget 은 두 부분으로 나눕니다.
 ### life cycle
 
 `initState` 함수와 `dispose` 함수를 사용하면, mount 와 unmount 일 때 코드를 실행할 수 있습니다.
+
+## 포모도로
+
+lib/main.dart
+```dart
+import 'package:flutter/material.dart';
+import 'package:toonflix/screens/home_screen.dart';
+
+void main() {
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
+          ),
+        ),
+        cardColor: const Color(0xFFF4EDDB),
+        colorScheme: const ColorScheme(
+            brightness: Brightness.dark,
+            error: Colors.deepOrange,
+            primary: Colors.blue,
+            onPrimary: Colors.black,
+            secondary: Colors.black12,
+            onSecondary: Colors.black45,
+            onError: Colors.black45,
+            background: Color(0xFFE7626C),
+            onBackground: Colors.black87,
+            surface: Colors.black45,
+            onSurface: Colors.black38,
+
+            ),
+      ),
+      home: const HomeScreen(),
+    );
+  }
+}
+```
+
+lib/screens/home_screen.dart
+```dart
+import 'dart:async';
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  static const twentyFiveMinutes = 1500;
+  int totalSeconds = twentyFiveMinutes;
+  bool isRunning = false;
+  int totalPomodoros = 0;
+  late Timer timer;
+
+  void onTick(Timer timer) {
+    if (totalSeconds == 0) {
+      setState(() {
+        totalPomodoros = totalPomodoros + 1;
+        isRunning = false;
+        totalSeconds = twentyFiveMinutes;
+      });
+      timer.cancel();
+    } else {
+      setState(() {
+        totalSeconds = totalSeconds - 1;
+      });
+    }
+  }
+
+  void onStartPressed() {
+    timer = Timer.periodic(
+      const Duration(seconds: 1),
+      onTick,
+    );
+        setState(() {
+      isRunning = true;
+    });
+  }
+
+  void onPausePressed() {
+    timer.cancel();
+    setState(() {
+      isRunning = false;
+    });
+  }
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+    return duration.toString().split(".").first.substring(2, 7);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                format(totalSeconds),
+                style: TextStyle(
+                  color: Theme.of(context).cardColor,
+                  fontSize: 89,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 3,
+            child: Center(
+              child: IconButton(
+                iconSize: 120,
+                color: Theme.of(context).cardColor,
+                onPressed: isRunning ? onPausePressed : onStartPressed,
+                icon: Icon(isRunning
+                    ? Icons.pause_circle_outline
+                    : Icons.play_circle_outline),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Pomodoros',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                        Text(
+                          '$totalPomodoros',
+                          style: TextStyle(
+                            fontSize: 58,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+```
+
+챌린지
+1. play/pause 기능 외에 reset 기능을 추가하기

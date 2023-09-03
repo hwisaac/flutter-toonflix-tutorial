@@ -551,5 +551,4 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 ```
 
-챌린지
-1. play/pause 기능 외에 reset 기능을 추가하기
+- 챌린지 :play/pause 기능 외에 reset 기능을 추가하기

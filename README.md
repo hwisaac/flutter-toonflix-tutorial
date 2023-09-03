@@ -557,3 +557,35 @@ class _HomeScreenState extends State<HomeScreen> {
 1. play/pause 기능 외에 reset 기능을 추가하기
 
 ## toonflix
+
+> 패키지는 `https://pub.dev` 에서 찾을 수 있습니다.
+
+http 요청을 하려면 `http` 라이브러리를 설치하면 됩니다 : https://pub.dev/packages/http
+
+```bash
+$ dart pub add http
+```
+
+```bash
+$ flutter pub add http
+```
+
+### 비동기
+javascript 처럼 async-await 를 사용할 수 있다.
+
+```dart
+static Future<List<WebtoonModel>> getTodaysToons() async {
+    List<WebtoonModel> webtoonInstances = [];
+    final url = Uri.parse('$baseUrl/$today');
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final webtoons = jsonDecode(response.body);
+      for (var webtoon in webtoons) {
+        final instance = WebtoonModel.fromJson(webtoon);
+        webtoonInstances.add(instance);
+      }
+      return webtoonInstances;
+    }
+    throw Error();
+  }
+```

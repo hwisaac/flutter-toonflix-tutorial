@@ -1,54 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:toonflix/screens/home_screen.dart';
+
 void main() {
   runApp(const App());
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({super.key});
 
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            color: Colors.red,
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
           ),
         ),
-      ),
-      home: const Scaffold(
-        backgroundColor: Color(0xFFF4EDDB),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MyLargeTitle(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+        cardColor: const Color(0xFFF4EDDB),
+        colorScheme: const ColorScheme(
+            brightness: Brightness.dark,
+            error: Colors.black12,
+            primary: Color(0xFFFFFFFF),
+            onPrimary: Colors.black,
+            secondary: Colors.black12,
+            onSecondary: Colors.black45,
+            onError: Colors.black45,
+            background: Color(0xFFE7626C),
+            onBackground: Colors.black87,
+            surface: Colors.black45,
+            onSurface: Colors.black38,
 
-class MyLargeTitle extends StatelessWidget {
-  const MyLargeTitle({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'My Large Title',
-      style: TextStyle(
-        fontSize: 30,
-        color: Theme.of(context).textTheme.titleLarge?.color,
+            ),
       ),
+      home: const HomeScreen(),
     );
   }
 }

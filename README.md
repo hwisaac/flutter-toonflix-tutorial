@@ -369,3 +369,7 @@ class CurrencyCard extends StatelessWidget {
 stateful widget 은 두 부분으로 나눕니다.
 - state가 없을 때
 - state가 있을 때
+
+### life cycle
+
+`initState` 함수와 `dispose` 함수를 사용하면, mount 와 unmount 일 때 코드를 실행할 수 있습니다.

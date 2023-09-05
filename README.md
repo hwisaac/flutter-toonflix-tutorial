@@ -589,3 +589,16 @@ static Future<List<WebtoonModel>> getTodaysToons() async {
     throw Error();
   }
 ```
+
+### url_launcher
+
+https://pub.dev/packages/url_launcher
+
+
+> `url_launcher` 를 사용하면 플러터에서 브라우저를 열수도 있습니다.
+
+### shared_preferences
+
+https://pub.dev/packages/shared_preferences
+
+> 상태관리를 할 수 있습니다.
